@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ShapeDrawingApp.ViewModels"
+             x:Class="ShapeDrawingApp.Controls.ShapeCanvas"
+             x:DataType="vm:MainWindowViewModel">
+    <Canvas Name="DrawingCanvas" 
+            Background="#F0F0F0" 
+            ClipToBounds="True"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+    </Canvas>
+</UserControl>

@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ShapeDrawingApp.ViewModels"
+        xmlns:controls="using:ShapeDrawingApp.Controls"
+        xmlns:models="using:ShapeDrawingApp.Models"
+        x:Class="ShapeDrawingApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="900" Height="600"
+        Title="Редактор геометрических фигур">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="300,*">
+        <ScrollViewer Grid.Column="0" Background="#FFFFFF">
+            <StackPanel Margin="15" Spacing="15">
+                <TextBlock Text="Тип фигуры" FontWeight="Bold" FontSize="16"/>
+                <StackPanel Spacing="5">
+                    <RadioButton Content="Прямоугольник" 
+                                 IsChecked="{Binding IsRectangle}"
+                                 Click="OnRectangleSelected"/>
+                    <RadioButton Content="Круг" 
+                                 IsChecked="{Binding IsCircle}"
+                                 Click="OnCircleSelected"/>
+                </StackPanel>
+
+                <Separator/>
+
+                <TextBlock Text="Цвет фигуры" FontWeight="Bold"/>
+                <TextBox Text="{Binding FillColor}" Watermark="#AARRGGBB"/>
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <Button Content="Красный" Click="SetRedColor" Width="80"/>
+                    <Button Content="Синий" Click="SetBlueColor" Width="80"/>
+                    <Button Content="Зеленый" Click="SetGreenColor" Width="80"/>
+                </StackPanel>
+
+                <Separator/>
+
+                <TextBlock Text="Текст на фигуре" FontWeight="Bold"/>
+                <TextBox Text="{Binding Text}"/>
+
+                <TextBlock Text="Цвет текста" FontWeight="Bold"/>
+                <TextBox Text="{Binding TextColor}" Watermark="#AARRGGBB"/>
+
+                <Separator/>
+
+                <StackPanel IsVisible="{Binding IsRectangle}" Spacing="10">
+                    <TextBlock Text="Размер прямоугольника" FontWeight="Bold" FontSize="14"/>
+                    
+                    <TextBlock Text="{Binding Width, StringFormat='Ширина: {0:F0}'}"/>
+                    <Slider Minimum="50" Maximum="500" Value="{Binding Width}"/>
+
+                    <TextBlock Text="{Binding Height, StringFormat='Высота: {0:F0}'}"/>
+                    <Slider Minimum="50" Maximum="500" Value="{Binding Height}"/>
+
+                    <TextBlock Text="{Binding Rotation, StringFormat='Поворот: {0:F0}°'}"/>
+                    <Slider Minimum="0" Maximum="360" Value="{Binding Rotation}"/>
+                </StackPanel>
+
+                <StackPanel IsVisible="{Binding IsCircle}" Spacing="10">
+                    <TextBlock Text="Размер круга" FontWeight="Bold" FontSize="14"/>
+                    
+                    <TextBlock Text="{Binding Width, StringFormat='Размер: {0:F0}'}"/>
+                    <Slider Minimum="50" Maximum="500" Value="{Binding Width}"/>
+
+                    <TextBlock Text="{Binding HorizontalScale, StringFormat='Сжатие по горизонтали: {0:F2}'}"/>
+                    <Slider Minimum="0.1" Maximum="2.0" Value="{Binding HorizontalScale}" 
+                            SmallChange="0.01" LargeChange="0.1"/>
+
+                    <TextBlock Text="{Binding VerticalScale, StringFormat='Сжатие по вертикали: {0:F2}'}"/>
+                    <Slider Minimum="0.1" Maximum="2.0" Value="{Binding VerticalScale}"
+                            SmallChange="0.01" LargeChange="0.1"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <controls:ShapeCanvas Grid.Column="1" DataContext="{Binding}"/>
+    </Grid>
+</Window>
