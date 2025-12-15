@@ -1,5 +1,5 @@
 # BHS-test
-Папка BHS test - задание 1
+Папка BHS test - задание 1(для запуска программы - dotnet restore, dotnet build, dotnet run)
 Файл review.cs - задание 2
 ## Задание 3
 ### Избыточное выделение памяти
